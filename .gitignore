@@ -1,0 +1,8 @@
+.scrapy
+.vscode
+.ipynb_checkpoints
+.ycm_extra_conf.py
+*.swp
+*.log
+*.sqlite
+
