@@ -12,9 +12,10 @@ class PlayerType(Enum):
     CB = auto()
     DE = auto()
     DT = auto()
+    FB = auto()
     ILB = auto()
     K = auto()
-    LS = auto()
+    KR = auto()
     OG = auto()
     OLB = auto()
     OT = auto()
@@ -22,6 +23,7 @@ class PlayerType(Enum):
     QB = auto()
     RB = auto()
     S = auto()
+    ST = auto()
     TE = auto()
     WR = auto()
 
@@ -83,6 +85,8 @@ class Player(scrapy.Item):  # pylint: disable=too-many-ancestors
 
 # TODO: Replace all relative links on pro football reference with absolute
 # links.
+# TODO: Consider adding a year field to the table as players may change
+# positions throughout their career.
 class PlayerPosition(scrapy.Item):  # pylint: disable=too-many-ancestors
     """Defines a position played by a player. It is possible for a player to
     play multiple positions, so a single player may yield multiple items."""
@@ -124,4 +128,88 @@ class PlayerPosition(scrapy.Item):  # pylint: disable=too-many-ancestors
         ''', (self['player'], self['position'].name))
 
 
-PFR_POSITION_CODES_TRANSLATIONS = {}
+PFR_POSITION_CODES_TRANSLATIONS = {
+        '3QB': [PlayerType.QB],
+        'B': [PlayerType.RB],
+        'BB': [PlayerType.FB],
+        'BLB': [PlayerType.ILB],
+        'D': [],
+        'DB': [PlayerType.CB, PlayerType.S],
+        'DG': [PlayerType.DT],
+        'DL': [PlayerType.DE, PlayerType.DT],
+        'DS': [],
+        'E': [PlayerType.TE],
+        'EDGE': [PlayerType.DE, PlayerType.OLB],
+        'END': [PlayerType.DE],
+        'F': [],
+        'FL': [PlayerType.WR],
+        'FLEX': [],
+        'FS': [PlayerType.S],
+        'G': [PlayerType.OG],
+        'H': [],
+        'HB': [PlayerType.RB],
+        'JACK': [PlayerType.OLB],
+        'JLB': [PlayerType.ILB],
+        'K': [PlayerType.K],
+        'L': [],
+        'LB': [PlayerType.OLB, PlayerType.ILB],
+        'LCB': [PlayerType.CB],
+        'LDE': [PlayerType.DE],
+        'LDH': [PlayerType.CB],
+        'LDT': [PlayerType.DT],
+        'LE': [PlayerType.TE],
+        'LG': [PlayerType.OG],
+        'LH': [PlayerType.RB],
+        'LILB': [PlayerType.ILB],
+        'LLB': [PlayerType.OLB],
+        'LOLB': [PlayerType.OLB],
+        'LOT': [PlayerType.OT],
+        'LS': [PlayerType.S],
+        'LT': [PlayerType.OT],
+        'M': [],
+        'MG': [PlayerType.DT],
+        'MIKE': [PlayerType.ILB],
+        'MILB': [PlayerType.ILB],
+        'MLB': [PlayerType.ILB],
+        'MOLB': [PlayerType.ILB],
+        'N': [],
+        'NB': [PlayerType.CB],
+        'NG': [],
+        'NT': [PlayerType.DT],
+        'OL': [PlayerType.OT, PlayerType.OG],
+        'P': [PlayerType.P],
+        'PK': [PlayerType.K],
+        'PR': [PlayerType.KR],
+        'Q': [],
+        'R': [],
+        'RCB': [PlayerType.CB],
+        'RDE': [PlayerType.DE],
+        'RDH': [PlayerType.CB],
+        'RDT': [PlayerType.DT],
+        'RE R': [PlayerType.DE],
+        'RE': [PlayerType.DE],
+        'RET': [PlayerType.KR],
+        'RG': [PlayerType.OG],
+        'RH': [PlayerType.RB],
+        'RILB': [PlayerType.ILB],
+        'RLB': [PlayerType.OLB],
+        'RLB': [PlayerType.OLB],
+        'ROLB': [PlayerType.OLB],
+        'ROT': [PlayerType.OT],
+        'RS': [PlayerType.S],
+        'RT': [PlayerType.OT],
+        'RUSH': [PlayerType.OLB],
+        'SAM': [PlayerType.OLB],
+        'SE': [PlayerType.WR],
+        'SLB': [PlayerType.OLB],
+        'SS': [PlayerType.S],
+        'T': [PlayerType.OT],
+        'TB': [PlayerType.RB],
+        'UT': [PlayerType.DT],
+        'W': [],
+        'WB': [PlayerType.RB],
+        'WE': [PlayerType.DE],
+        'WIL': [PlayerType.OLB],
+        'WILL': [PlayerType.OLB],
+        'WLB': [PlayerType.OLB],
+}

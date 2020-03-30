@@ -1,4 +1,5 @@
 """Defines spiders related to NFL players."""
+import re
 import scrapy
 from nfldata.common.pfr import pfr_request, PRO_FOOTBALL_REFERENCE_DOMAIN
 from nfldata.items.players import (Player, PlayerType, PlayerPosition,
@@ -95,7 +96,12 @@ def parse_positions(response):
 
     positions = response.css(
         'table.stats_table td[data-stat=pos]::text').getall()
-    return [parse_position(p.upper()) for p in positions if p]
+    positions = [re.split('[,/\-]', p) for p in positions if p]
+    # Flatten list
+    positions = [p for sublist in positions for p in sublist]
+    positions = [parse_position(p.upper().strip()) for p in positions if p]
+    # Flatten list and make unique.
+    return list(set([p for sublist in positions for p in sublist]))
 
 
 def parse_position(position):
@@ -104,4 +110,4 @@ def parse_position(position):
     if position in PFR_POSITION_CODES_TRANSLATIONS:
         return PFR_POSITION_CODES_TRANSLATIONS[position]
 
-    return PlayerType[position]
+    return [PlayerType[position]]
