@@ -7,19 +7,19 @@ this data.
 
 ## Prequisites
 
-To run the code in this project, you need to have [Pipenv][pipenv], and
+To run the code in this project, you need to have [Poetry][poetry], and
 [Docker][docker] installed on your computer. 
 
 Then, to install of the project dependencies, run:
 
 ```sh
-pipenv install
+poetry install
 ```
 
 Then, activate the project's virtual environment by running:
 
 ```sh
-pipenv shell
+poetry shell
 ```
 
 ## How to scrape data
@@ -59,7 +59,7 @@ There are also [Jupyter][jupyter] notebooks, under the `notebooks` directory
 that I made containing some of my own work. Feel free to copy or use these to
 get an idea of how to perform your own analyses.
 
-[pipenv]:https://github.com/pypa/pipenv
+[poetry]:https://python-poetry.org/
 [docker]:https://docs.docker.com/
 [scrapy]:https://scrapy.org/
 [splash]:https://github.com/scrapy-plugins/scrapy-splash
