@@ -5,4 +5,4 @@
 *.swp
 *.log
 *.sqlite
-
+__pycache__/
