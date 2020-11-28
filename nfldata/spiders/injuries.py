@@ -24,7 +24,7 @@ class InjuriesSpider(scrapy.Spider):
     def start_requests(self):
         return [pfr_request('teams')]
 
-    def parse(self, response):
+    def parse(self, response):  #pylint: disable=arguments-differ
         for link in response.css(
                 'th[data-stat=team_name] a::attr(href)').getall():
             yield pfr_request(link, callback=parse_franchise)

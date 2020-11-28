@@ -20,7 +20,7 @@ class DraftPicksSpider(scrapy.Spider):
     def start_requests(self):
         return [create_request(year) for year in range(1936, 2020)]
 
-    def parse(self, response):
+    def parse(self, response):  # pylint: disable=arguments-differ
         for row in response.css('table#drafts tbody tr:not(.thead)'):
             yield parse_item(response.meta['year'], DraftType.NORMAL, row)
 

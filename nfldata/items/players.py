@@ -3,8 +3,6 @@ from enum import Enum, auto
 import scrapy
 
 
-# TODO: Rename all items to be suffixed with Item to avoid name collisions with
-# enums.
 class PlayerType(Enum):
     """Enumerates the positions that an NFL player could have."""
 
@@ -83,10 +81,6 @@ class Player(scrapy.Item):  # pylint: disable=too-many-ancestors
               self['pro_bowls'], self['career_approx_value']))
 
 
-# TODO: Replace all relative links on pro football reference with absolute
-# links.
-# TODO: Consider adding a year field to the table as players may change
-# positions throughout their career.
 class PlayerPosition(scrapy.Item):  # pylint: disable=too-many-ancestors
     """Defines a position played by a player. It is possible for a player to
     play multiple positions, so a single player may yield multiple items."""
@@ -192,7 +186,6 @@ PFR_POSITION_CODES_TRANSLATIONS = {
     'RG': [PlayerType.OG],
     'RH': [PlayerType.RB],
     'RILB': [PlayerType.ILB],
-    'RLB': [PlayerType.OLB],
     'RLB': [PlayerType.OLB],
     'ROLB': [PlayerType.OLB],
     'ROT': [PlayerType.OT],

@@ -59,6 +59,13 @@ There are also [Jupyter][jupyter] notebooks, under the `notebooks` directory
 that I made containing some of my own work. Feel free to copy or use these to
 get an idea of how to perform your own analyses.
 
+## Improvements
+
+- [] Remove `DraftPick.position`, `DraftPick.first_team_all_pros`, `DraftPick.pro_bowls`, and `DraftPick.career_approx_value` and join with the corresponding fields in `Player` instead.
+- [] Rename all items to be suffixed with "Item" to avoid naming collisions with enums.
+- [] Change all relative links to Pro Football Reference to absolute links.
+- [] Add a year field to `PlayerPosition` as players may change positions throughout their career.
+
 [poetry]:https://python-poetry.org/
 [docker]:https://docs.docker.com/
 [scrapy]:https://scrapy.org/

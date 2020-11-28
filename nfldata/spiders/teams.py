@@ -20,7 +20,7 @@ class TeamsSpider(scrapy.Spider):
     def start_requests(self):
         return [pfr_request('years')]
 
-    def parse(self, response):
+    def parse(self, response):  # pylint: disable=arguments-differ
         for row in response.css('th[data-stat="year_id"] a'):
             link = row.css('::attr(href)').get()
             year = int(row.css('::text').get())

@@ -6,3 +6,4 @@
 *.log
 *.sqlite
 __pycache__/
+data/

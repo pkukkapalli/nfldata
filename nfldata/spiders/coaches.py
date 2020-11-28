@@ -19,7 +19,7 @@ class CoachesSpider(scrapy.Spider):
     def start_requests(self):
         return [pfr_request('coaches')]
 
-    def parse(self, response):
+    def parse(self, response):  # pylint: disable=arguments-differ
         for row in response.css('table#coaches tbody tr:not(.thead)'):
             coach = row.css('td[data-stat="coach"] a::attr(href)').get()
             name = row.css('td[data-stat="coach"] a::text').get()

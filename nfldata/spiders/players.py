@@ -23,7 +23,7 @@ class PlayersSpider(scrapy.Spider):
     def start_requests(self):
         return [pfr_request('players')]
 
-    def parse(self, response):
+    def parse(self, response):  # pylint: disable=arguments-differ
         for link in response.css('#div_alphabet a::attr(href)').getall():
             yield pfr_request(link, callback=parse_players)
 
@@ -96,12 +96,12 @@ def parse_positions(response):
 
     positions = response.css(
         'table.stats_table td[data-stat=pos]::text').getall()
-    positions = [re.split('[,/\-]', p) for p in positions if p]
+    positions = [re.split(r'[,/\-]', p) for p in positions if p]
     # Flatten list
     positions = [p for sublist in positions for p in sublist]
     positions = [parse_position(p.upper().strip()) for p in positions if p]
     # Flatten list and make unique.
-    return list(set([p for sublist in positions for p in sublist]))
+    return list({p for sublist in positions for p in sublist})
 
 
 def parse_position(position):
