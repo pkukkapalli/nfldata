@@ -90,8 +90,14 @@ def parse_reasons(status, column):
 
     if status == InjuryStatus.SUSPENDED:
         return [InjuryType.SUSPENSION]
+    elif status == InjuryStatus.C19:
+        return [InjuryType.C19]
+    elif status == InjuryStatus.RESERVE_OR_FUTURE:
+        return [InjuryType.NOT_INJURY_RELATED]
 
     reasons = column.css('::attr(data-tip)').get()
+    if reasons == None or reasons == '':
+        return [InjuryType.UNDISCLOSED]
     _, reasons = reasons.split(':')
     reasons = re.split(', |/|,', reasons.strip().upper())
     reasons = [parse_reason(r) for r in reasons]
@@ -118,6 +124,13 @@ def parse_status(column):
     status = column.css('::attr(data-tip)').get()
     raw_status, _ = status.split(':')
     status = raw_status.strip().upper().replace(' ', '_')
+
+    if status == 'RESERVE/FUTURE':
+        return InjuryStatus.RESERVE_OR_FUTURE
+    elif status == 'RESERVE/INJURED_FROM_WAIVED/INJURED':
+        return InjuryStatus.INJURED_FROM_WAIVED
+    elif status == 'R/PUP_FROM_W/FP;_DOES_NOT_COUNT_ON_90':
+        return InjuryStatus.PHYSICALLY_UNABLE_TO_PERFORM
 
     # Will throw an exception if the status is missing from InjuryStatus.
     return InjuryStatus[status]

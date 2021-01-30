@@ -50,6 +50,11 @@ def parse_roster(response):
         team = response.meta['team']
         approximate_value = row.css('[data-stat="av"]::text').get()
         approximate_value = int(approximate_value) if approximate_value else 0
+        awards = row.css('[data-stat="player"]::text').get()
+        pro_bowl = awards is not None and '*' in awards
+        first_team_all_pro = awards is not None and '+' in awards
         yield RosterMember(player=player,
                            team=team,
-                           approximate_value=approximate_value)
+                           approximate_value=approximate_value,
+                           pro_bowl=pro_bowl,
+                           first_team_all_pro=first_team_all_pro)

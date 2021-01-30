@@ -27,8 +27,8 @@ class DraftPick(scrapy.Item):  # pylint: disable=too-many-ancestors
     # The pick number relative to the entire draft, not the round.
     draft_pick = scrapy.Field()
 
-    # A relative link on Pro Football Reference to the team that made the pick.
-    team = scrapy.Field()
+    # A relative link on Pro Football Reference to the franchise that made the pick.
+    franchise = scrapy.Field()
 
     # A relative link on Pro Football Reference to the player that was drafted.
     # If there is no page for this player, this field will just contain their
@@ -68,7 +68,7 @@ class DraftPick(scrapy.Item):  # pylint: disable=too-many-ancestors
                 draft_type TEXT,
                 draft_round INTEGER,
                 draft_pick INTEGER,
-                team TEXT,
+                franchise TEXT,
                 player TEXT,
                 age INTEGER,
                 first_team_all_pros INTEGER,
@@ -77,6 +77,10 @@ class DraftPick(scrapy.Item):  # pylint: disable=too-many-ancestors
                 draft_approx_value INTEGER,
                 college TEXT,
                 PRIMARY KEY (year, draft_type, draft_pick)
+                FOREIGN KEY (franchise) REFERENCES franchises(franchise)
+                FOREIGN KEY (player) REFERENCES players(player)
+                FOREIGN KEY (college) REFERENCES schools(school)
+                FOREIGN KEY (franchise, year) REFERENCES teams(franchise, year)
             )
         ''')
 
@@ -91,7 +95,7 @@ class DraftPick(scrapy.Item):  # pylint: disable=too-many-ancestors
                 draft_type,
                 draft_round,
                 draft_pick,
-                team,
+                franchise,
                 player,
                 age,
                 first_team_all_pros,
@@ -114,7 +118,7 @@ class DraftPick(scrapy.Item):  # pylint: disable=too-many-ancestors
                 ?
             )
         ''', (self['year'], self['draft_type'].name, self['draft_round'],
-              self['draft_pick'], self['team'], self['player'], self['age'],
+              self['draft_pick'], self['franchise'], self['player'], self['age'],
               self['first_team_all_pros'], self['pro_bowls'],
               self['career_approx_value'], self['draft_approx_value'],
               self['college']))

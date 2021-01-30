@@ -49,7 +49,7 @@ def parse_item(year, draft_type, row):
 
     draft_round = parse_int(row, 'th[data-stat="draft_round"]::text', -1)
     draft_pick = parse_int(row, 'td[data-stat="draft_pick"]::text', -1)
-    team = '/'.join(
+    franchise = '/'.join(
         row.css('td[data-stat="team"] a::attr(href)').get().split('/')[:-1])
 
     player = row.css('td[data-stat="player"] a::attr(href)').get()
@@ -72,7 +72,7 @@ def parse_item(year, draft_type, row):
                      draft_type=draft_type,
                      draft_round=draft_round,
                      draft_pick=draft_pick,
-                     team=team,
+                     franchise=franchise,
                      player=player,
                      position=position,
                      age=age,

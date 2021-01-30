@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+green_color="\033[0;32m"
+red_color="\033[0;31m"
+no_color="\033[0m"
+
+function fail_spider {
+  echo -e "${red_color}Spider failed: $1 could not finish successfully${no_color}"
+  exit 1
+}
+
+rm -r logfiles && echo -e "Cleaning up logfiles"
+mkdir logfiles || exit 1
+
+spiders=(franchises teams schools executives front_office_members coaches coaching_staffs players roster_members injuries draft_picks)
+
+# Scrape data from the internet using Scrapy.
+for spider in "${spiders[@]}"
+do
+  echo -e "${green_color}Spider running: ${spider}${no_color}"
+  scrapy crawl --logfile "logfiles/${spider}.log" $spider || fail_spider $spider
+done

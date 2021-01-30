@@ -16,6 +16,7 @@ class InjuryType(Enum):
     BICEPS = auto()
     BLOOD_CLOTS = auto()
     BLOOD_DISORDER = auto()
+    C19 = auto()
     CALF = auto()
     CHEST = auto()
     CHIN = auto()
@@ -57,6 +58,7 @@ class InjuryType(Enum):
     KNEE = auto()
     LEG = auto()
     LEGAL = auto()
+    LIVER = auto()
     LOWER_LEG = auto()
     LUMBAR = auto()
     LUNG = auto()
@@ -113,6 +115,9 @@ class InjuryStatus(Enum):
     PROBABLE = auto()
     QUESTIONABLE = auto()
     SUSPENDED = auto()
+    C19 = auto()
+    RESERVE_OR_FUTURE = auto()
+    INJURED_FROM_WAIVED = auto()
 
 
 class InjuryOutcome(Enum):
@@ -297,6 +302,7 @@ PFR_INJURY_REASON_SUBSTITUTIONS = {
     'GLUTEUS': [InjuryType.GLUTE],
     'HAMSTING': [InjuryType.HAMSTRING],
     'HAMSTIRNG': [InjuryType.HAMSTRING],
+    'HAMSTRINGS': [InjuryType.HAMSTRING],
     'HEADACHE': [InjuryType.HEADACHES],
     'HIIP': [InjuryType.HIP],
     'HIPS': [InjuryType.HIP],
@@ -351,6 +357,7 @@ PFR_INJURY_REASON_SUBSTITUTIONS = {
     'MIGRAINE': [InjuryType.MIGRAINES],
     'NACK': [InjuryType.NECK],
     'NINE_GAME_SUSPENSION_SERVED': [InjuryType.SUSPENSION_SERVED],
+    'NON_FOOTBALL_ILLNESS': [InjuryType.ILLNESS],
     'NOTINJURYRELATED': [InjuryType.NOT_INJURY_RELATED],
     'ONE_GAME_SUSPENSION': [InjuryType.SUSPENSION],
     'ONE_GAME_SUSPENSION_SERVED': [InjuryType.SUSPENSION_SERVED],

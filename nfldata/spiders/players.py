@@ -6,6 +6,7 @@ from nfldata.items.players import (Player, PlayerType, PlayerPosition,
                                    PFR_POSITION_CODES_TRANSLATIONS)
 
 
+# TODO consolidate spiders so that there are fewer to run.
 class PlayersSpider(scrapy.Spider):
     """The spider that crawls and stores all of the players that have played
     throughout NFL history."""
@@ -39,7 +40,7 @@ def parse_player(response):
     """Parse player details from a single player's profile."""
 
     player = response.meta['player']
-    name = response.css('[itemprop=name]::text').get()
+    name = response.css('h1[itemprop=name] span::text').get()
     first_team_all_pros = parse_first_team_all_pros(response)
     pro_bowls = parse_pro_bowls(response)
     career_approx_value = parse_career_approx_value(response)

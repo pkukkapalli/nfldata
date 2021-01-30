@@ -1,7 +1,30 @@
 """Defines the spiders related to NFL teams"""
 import scrapy
 from nfldata.common.pfr import pfr_request, PRO_FOOTBALL_REFERENCE_DOMAIN
-from nfldata.items.teams import Team
+from nfldata.items.teams import Franchise, Team
+
+
+class FranchisesSpider(scrapy.Spider):
+    """The spider that crawls and stores the franchises throughout history."""
+
+    name = 'franchises'
+    allowed_domains = [PRO_FOOTBALL_REFERENCE_DOMAIN]
+
+    @classmethod
+    def create_table(cls, database):
+        """Create the table needed for this spider."""
+        Franchise.sql_create(database)
+
+    def start_requests(self):
+        return [pfr_request('teams')]
+
+    def parse(self, response):
+        for row in response.css('th[data-stat="team_name"] a'):
+            franchise = row.css('::attr(href)').get()
+            if franchise.endswith('/'):
+                franchise = franchise[:-1]
+            name = row.css('::text').get()
+            yield Franchise(franchise=franchise, name=name)
 
 
 class TeamsSpider(scrapy.Spider):
@@ -14,32 +37,29 @@ class TeamsSpider(scrapy.Spider):
     @classmethod
     def create_table(cls, database):
         """Create the table needed for this spider."""
-
         Team.sql_create(database)
 
     def start_requests(self):
-        return [pfr_request('years')]
+        return [pfr_request('teams')]
 
     def parse(self, response):  # pylint: disable=arguments-differ
-        for row in response.css('th[data-stat="year_id"] a'):
-            link = row.css('::attr(href)').get()
-            year = int(row.css('::text').get())
-            yield pfr_request(link, meta={'year': year}, callback=parse_year)
+        for row in response.css('th[data-stat="team_name"] a'):
+            franchise = row.css('::attr(href)').get()
+            if franchise.endswith('/'):
+                franchise = franchise[:-1]
+            yield pfr_request(franchise,
+                              meta={'franchise': franchise},
+                              callback=parse_franchise)
 
 
-def parse_year(response):
-    """Parses all of the teams in a single year into Team items."""
+def parse_franchise(response):
+    """Parses all of the teams in a single franchise into Team items."""
 
-    rows = [
-        *response.css('table#NFL tr[data-row]:not(.thead)'),
-        *response.css('table#APFA tr[data-row]:not(.thead)'),
-        *response.css('table#NFC tr[data-row]:not(.thead)'),
-        *response.css('table#AFC tr[data-row]:not(.thead)'),
-    ]
-    for row in rows:
-        team = row.css('th[data-stat="team"] a::attr(href)').get()
-        year = response.meta['year']
-        name = row.css('th[data-stat="team"] a::text').get()
+    for row in response.css('table#team_index tr[data-row]:not(.thead)'):
+        team = row.css('td[data-stat="team"] a::attr(href)').get()
+        year = int(row.css('th[data-stat="year_id"] a::text').get())
+        name = row.css('td[data-stat="team"] a::text').get()
+        franchise = response.meta['franchise']
         regular_season_wins = int(row.css('td[data-stat="wins"]::text').get())
         regular_season_losses = int(
             row.css('td[data-stat="losses"]::text').get())
@@ -54,6 +74,7 @@ def parse_year(response):
         yield Team(team=team,
                    year=year,
                    name=name,
+                   franchise=franchise,
                    regular_season_wins=regular_season_wins,
                    regular_season_losses=regular_season_losses,
                    regular_season_ties=regular_season_ties)

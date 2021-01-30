@@ -25,5 +25,6 @@ class SqlitePipeline:
     def process_item(self, item, spider):  # pylint: disable=unused-argument
         """Writes the given item to SQLite."""
 
-        item.sql_insert(self.database)
+        if 'sql_insert' in dir(item):
+            item.sql_insert(self.database)
         return item
