@@ -33,16 +33,16 @@ You need the Splash service running before you start your spider. You can do
 that by running:
 
 ```sh
-./scripts/splash-server.sh
+./scripts/splash-server
 ``` 
 
-Then, run one of the spiders using:
+Then, run the spiders and build up the SQLite database use:
 
 ```sh
-scrapy crawl <spider>
+./scripts/build-database
 ```
 
-Each of these spiders writes the data to a SQLite database saved as
+Each of the spiders writes the data to a SQLite database saved as
 `nfldata.sqlite`. The database is not included as part of this repo, because my
 intention is not to mirror the data already available on Pro Football Reference.
 Rather, it is to provide a way to get that data in a way that is easy to
@@ -65,6 +65,8 @@ get an idea of how to perform your own analyses.
 - [] Rename all items to be suffixed with "Item" to avoid naming collisions with enums.
 - [] Change all relative links to Pro Football Reference to absolute links.
 - [] Add a year field to `PlayerPosition` as players may change positions throughout their career.
+- [] Consolidate spiders, so that there are fewer passes over the same web pages.
+- [] Parse player transactions for free agents and undrafted free agents.
 
 [poetry]:https://python-poetry.org/
 [docker]:https://docs.docker.com/

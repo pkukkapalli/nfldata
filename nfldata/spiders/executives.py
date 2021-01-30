@@ -4,7 +4,6 @@ from nfldata.common.pfr import pfr_request, PRO_FOOTBALL_REFERENCE_DOMAIN
 from nfldata.items.executives import Executive, FrontOfficeMember
 
 
-# TODO parse player transactions for free agents and undrafted free agents.
 class ExecutivesSpider(scrapy.Spider):
     """The spider that crawls and stores information about NFL coaches."""
 

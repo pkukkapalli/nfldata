@@ -6,7 +6,6 @@ from nfldata.items.players import (Player, PlayerType, PlayerPosition,
                                    PFR_POSITION_CODES_TRANSLATIONS)
 
 
-# TODO consolidate spiders so that there are fewer to run.
 class PlayersSpider(scrapy.Spider):
     """The spider that crawls and stores all of the players that have played
     throughout NFL history."""
