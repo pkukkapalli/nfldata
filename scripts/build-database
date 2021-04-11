@@ -12,11 +12,26 @@ function fail_spider {
 rm -r logfiles && echo -e "Cleaning up logfiles"
 mkdir logfiles || exit 1
 
-spiders=(franchises teams schools executives front_office_members coaches coaching_staffs players roster_members injuries draft_picks)
+spiders=()
+while getopts "s:" OPTION; do
+  case $OPTION in
+  s)
+    spiders+=($OPTARG)
+    ;;
+  *)
+    echo "${red_color}Invalid option: $OPTION${no_color}"
+    exit 1
+    ;;
+  esac
+done
+
+if [ ${#spiders[@]} -eq 0 ]; then
+  spiders=(franchises teams stadiums schools executives front_office_members coaches coaching_staffs players roster_members injuries draft_picks)
+fi
 
 # Scrape data from the internet using Scrapy.
 for spider in "${spiders[@]}"
 do
   echo -e "${green_color}Spider running: ${spider}${no_color}"
-  scrapy crawl --logfile "logfiles/${spider}.log" $spider || fail_spider $spider
+  poetry run scrapy crawl --logfile "logfiles/${spider}.log" $spider || fail_spider $spider
 done

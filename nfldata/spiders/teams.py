@@ -49,10 +49,10 @@ class TeamsSpider(scrapy.Spider):
                 franchise = franchise[:-1]
             yield pfr_request(franchise,
                               meta={'franchise': franchise},
-                              callback=parse_franchise)
+                              callback=parse_teams_for_franchise)
 
 
-def parse_franchise(response):
+def parse_teams_for_franchise(response):
     """Parses all of the teams in a single franchise into Team items."""
 
     for row in response.css('table#team_index tr[data-row]:not(.thead)'):

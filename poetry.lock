@@ -536,6 +536,14 @@ qa = ["flake8 (3.7.9)"]
 testing = ["Django (<3.1)", "colorama", "docopt", "pytest (>=3.9.0,<5.0.0)"]
 
 [[package]]
+name = "jellyfish"
+version = "0.6.1"
+description = "a library for doing approximate and phonetic matching of strings."
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "jinja2"
 version = "2.11.2"
 description = "A very fast and expressive template engine."
@@ -1016,6 +1024,17 @@ description = "The smartest command line arguments parser in the world"
 category = "main"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "postal"
+version = "1.1.9"
+description = "Python bindings to libpostal for fast international address parsing/normalization"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = "*"
 
 [[package]]
 name = "preshed"
@@ -1642,6 +1661,17 @@ secure = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "cer
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
 
 [[package]]
+name = "us"
+version = "2.0.2"
+description = "US state meta information and other fun stuff"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+jellyfish = "0.6.1"
+
+[[package]]
 name = "w3lib"
 version = "1.22.0"
 description = "Library of web-related functions"
@@ -1719,7 +1749,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "d2ba94d1b775ce06a9ea7c1b0e2f48db7617e901c95539a5ae8f66e90cb7b039"
+content-hash = "a5ce6d7a12dbe7ea5aa74a2f1d1607b18132125294d6e8063975641b5910b8dd"
 
 [metadata.files]
 adal = [
@@ -1993,6 +2023,9 @@ itemloaders = [
 jedi = [
     {file = "jedi-0.17.2-py2.py3-none-any.whl", hash = "sha256:98cc583fa0f2f8304968199b01b6b4b94f469a1f4a74c1560506ca2a211378b5"},
     {file = "jedi-0.17.2.tar.gz", hash = "sha256:86ed7d9b750603e4ba582ea8edc678657fb4007894a12bcf6f4bb97892f31d20"},
+]
+jellyfish = [
+    {file = "jellyfish-0.6.1.tar.gz", hash = "sha256:5104e45a2b804b48a46a92a5e6d6e86830fe60ae83b1da32c867402c8f4c2094"},
 ]
 jinja2 = [
     {file = "Jinja2-2.11.2-py2.py3-none-any.whl", hash = "sha256:f0a4641d3cf955324a89c04f3d94663aa4d638abe8f733ecd3582848e1c37035"},
@@ -2372,6 +2405,9 @@ pillow = [
 plac = [
     {file = "plac-1.1.3-py2.py3-none-any.whl", hash = "sha256:487e553017d419f35add346c4c09707e52fa53f7e7181ce1098ca27620e9ceee"},
     {file = "plac-1.1.3.tar.gz", hash = "sha256:398cb947c60c4c25e275e1f1dadf027e7096858fb260b8ece3b33bcff90d985f"},
+]
+postal = [
+    {file = "postal-1.1.9.tar.gz", hash = "sha256:2158fde6872d57c342b384ca1d0eadd562dc466a8a36f1160919e8189864b1b1"},
 ]
 preshed = [
     {file = "preshed-3.0.4-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:a11cb04a47cc1ff08765a8cd2ee1849e49970dda85c73c2a72f7e130ba6073ba"},
@@ -2833,6 +2869,9 @@ typing-extensions = [
 urllib3 = [
     {file = "urllib3-1.26.2-py2.py3-none-any.whl", hash = "sha256:d8ff90d979214d7b4f8ce956e80f4028fc6860e4431f731ea4a8c08f23f99473"},
     {file = "urllib3-1.26.2.tar.gz", hash = "sha256:19188f96923873c92ccb987120ec4acaa12f0461fa9ce5d3d0772bc965a39e08"},
+]
+us = [
+    {file = "us-2.0.2.tar.gz", hash = "sha256:cb11ad0d43deff3a1c3690c74f0c731cff5b862c73339df2edd91133e1496fbc"},
 ]
 w3lib = [
     {file = "w3lib-1.22.0-py2.py3-none-any.whl", hash = "sha256:0161d55537063e00d95a241663ede3395c4c6d7b777972ba2fd58bbab2001e53"},

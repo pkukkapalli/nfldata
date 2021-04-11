@@ -3,7 +3,6 @@ from urllib.parse import urljoin
 from scrapy_splash import SplashRequest
 
 PRO_FOOTBALL_REFERENCE_DOMAIN = 'pro-football-reference.com'
-
 SPLASH_REQUEST_ARGS = {'wait': 1, 'timeout': 300}
 
 

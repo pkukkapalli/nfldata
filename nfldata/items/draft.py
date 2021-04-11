@@ -118,7 +118,7 @@ class DraftPick(scrapy.Item):  # pylint: disable=too-many-ancestors
                 ?
             )
         ''', (self['year'], self['draft_type'].name, self['draft_round'],
-              self['draft_pick'], self['franchise'], self['player'], self['age'],
-              self['first_team_all_pros'], self['pro_bowls'],
+              self['draft_pick'], self['franchise'], self['player'],
+              self['age'], self['first_team_all_pros'], self['pro_bowls'],
               self['career_approx_value'], self['draft_approx_value'],
               self['college']))
