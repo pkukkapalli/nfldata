@@ -6,7 +6,7 @@ authors = ["Pradyoth Kukkapalli <pkukkapalli@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Scrapy = "^2.4.0"
+Scrapy = "^2.5.1"
 scrapy-splash = "^0.7.2"
 matplotlib = "^3.3.3"
 pandas = "^1.1.4"
