@@ -33,5 +33,5 @@ fi
 for spider in "${spiders[@]}"
 do
   echo -e "${green_color}Spider running: ${spider}${no_color}"
-  poetry run scrapy crawl --logfile "logfiles/${spider}.log" $spider || fail_spider $spider
+  nfldata-env/bin/scrapy crawl --logfile "logfiles/${spider}.log" $spider || fail_spider $spider
 done

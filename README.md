@@ -68,6 +68,28 @@ get an idea of how to perform your own analyses.
 - [] Consolidate spiders, so that there are fewer passes over the same web pages.
 - [] Parse player transactions for free agents and undrafted free agents.
 
+## Dockerize everything
+
+To containerize this entire process, and be able to use Kubernetes on this
+project, we need to do the following things.
+
+1. Make a proper web app. We need a proper web app in order to actually show off
+   the usefulness of having different services and k8s.
+2. Create a Dockerfile for each scraper.
+3. Create an analysis API server.
+4. Dockerfile for the analysis server.
+5. Create a script to start all the Docker containers together, and have them communicate via localhost.
+6. Transition to k8s.
+
+For actually building the web app, let's start with the following analyses:
+
+1. Injuries
+  - Breakdowns offered by year, team, coach, position
+  - Present in both graph and table format
+2. Draft record for general managers
+  - Breakdowns by general manager, team, year, draft round
+  - Present in both graph and table formats
+
 [poetry]:https://python-poetry.org/
 [docker]:https://docs.docker.com/
 [scrapy]:https://scrapy.org/

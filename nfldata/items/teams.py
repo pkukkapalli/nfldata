@@ -24,6 +24,10 @@ class Franchise(scrapy.Item):  # pylint: disable=too-many-ancestors
             )
         ''')
 
+    @staticmethod
+    def from_sql_cursor(cursor):
+        """Given a cursor that already contains selected rows, with both the franchise and name fields, return a set of Franchise items."""
+
     def sql_insert(self, database):
         """Inserts this franchise into the franchises table in the given
         database."""

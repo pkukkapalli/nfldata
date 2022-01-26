@@ -8,3 +8,5 @@
 __pycache__/
 data/
 logfiles/
+node_modules/
+nfldata-env/
