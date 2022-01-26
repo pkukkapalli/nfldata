@@ -7,19 +7,19 @@ this data.
 
 ## Prequisites
 
-To run the code in this project, you need to have [Poetry][poetry], and
+To run the code in this project, you need to have [Python 3][python], and
 [Docker][docker] installed on your computer. 
 
-Then, to install of the project dependencies, run:
+Then, to create a virtual environment, run:
 
 ```sh
-poetry install
+scripts/create-env
 ```
 
 Then, activate the project's virtual environment by running:
 
 ```sh
-poetry shell
+scripts/activate-env
 ```
 
 ## How to scrape data
@@ -33,13 +33,13 @@ You need the Splash service running before you start your spider. You can do
 that by running:
 
 ```sh
-./scripts/splash-server
+scripts/splash-server
 ``` 
 
 Then, run the spiders and build up the SQLite database use:
 
 ```sh
-./scripts/build-database
+scripts/build-database
 ```
 
 Each of the spiders writes the data to a SQLite database saved as
@@ -90,7 +90,7 @@ For actually building the web app, let's start with the following analyses:
   - Breakdowns by general manager, team, year, draft round
   - Present in both graph and table formats
 
-[poetry]:https://python-poetry.org/
+[python]:https://wiki.python.org/moin/BeginnersGuide/Download
 [docker]:https://docs.docker.com/
 [scrapy]:https://scrapy.org/
 [splash]:https://github.com/scrapy-plugins/scrapy-splash
