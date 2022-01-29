@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+nfldata-env/bin/pip install -r requirements.txt
