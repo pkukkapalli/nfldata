@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 python3 -m venv nfldata-env || exit 1
 nfldata-env/bin/pip install -r requirements.txt
