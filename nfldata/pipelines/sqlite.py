@@ -1,6 +1,5 @@
 """Defines pipelines to write items to a SQLite database."""
 import sqlite3
-import os
 
 
 class SqlitePipeline:
