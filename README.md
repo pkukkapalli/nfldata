@@ -13,13 +13,13 @@ To run the code in this project, you need to have [Python 3][python], and
 Then, to create a virtual environment, run:
 
 ```sh
-scripts/create-env
+scripts/create-env.py --all
 ```
 
 Then, activate the project's virtual environment by running:
 
 ```sh
-scripts/activate-env
+source nfldata-env/bin/activate
 ```
 
 ## How to scrape data
@@ -33,13 +33,13 @@ You need the Splash service running before you start your spider. You can do
 that by running:
 
 ```sh
-scripts/splash-server
+scripts/splash-server.sh
 ``` 
 
 Then, run the spiders and build up the SQLite database use:
 
 ```sh
-scripts/build-database
+scripts/build-database.sh
 ```
 
 Each of the spiders writes the data to a SQLite database saved as
