@@ -1,3 +1,11 @@
 #!/usr/bin/env sh
 
-FLASK_APP=nfldata.api FLASK_ENV=development nfldata-env/bin/flask run
+docker stop nfldata-api
+docker rm nfldata-api
+docker build \
+  --tag nfldata-api:local \
+  --file containers/api.Dockerfile . || exit 1
+docker run \
+  --publish 5000:5000 \
+  -v $(pwd)/nfldata.sqlite:/usr/src/app/nfldata.sqlite \
+  nfldata-api:local
