@@ -1,0 +1,17 @@
+.git/
+*.log
+*.sqlite
+.scrapy
+.vscode
+.scrapy
+.vscode
+.ipynb_checkpoints
+.ycm_extra_conf.py
+*.swp
+*.log
+*.sqlite
+__pycache__/
+data/
+logfiles/
+node_modules/
+nfldata-env/

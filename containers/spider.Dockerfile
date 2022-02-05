@@ -16,4 +16,4 @@ COPY scrapy.cfg .
 COPY scripts/build-database.sh scripts/build-database.sh
 COPY --from=builder /usr/src/app/nfldata-env nfldata-env
 
-CMD ["./scripts/build-database.sh"]
+CMD ["scripts/build-database.sh"]
