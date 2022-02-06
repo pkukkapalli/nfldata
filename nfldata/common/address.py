@@ -8,13 +8,12 @@ CITY_NAME_SUBSTITUTIONS = {
 
 
 def parse_address(address):
-    address = {
-        key: value for value, key in usaddress.parse_address(address)
-    }
+    address = {key: value for value, key in usaddress.parse_address(address)}
     city = address['PlaceName'] if 'PlaceName' in address else None
     city = CITY_NAME_SUBSTITUTIONS[
         city] if city in CITY_NAME_SUBSTITUTIONS else city
-    state = normalize_state(address['StateName']) if 'StateName' in address else None
+    state = normalize_state(
+        address['StateName']) if 'StateName' in address else None
     return _Address(state=state, city=city)
 
 

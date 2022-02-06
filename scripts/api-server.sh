@@ -8,4 +8,5 @@ docker build \
 docker run \
   --publish 5000:5000 \
   -v $(pwd)/nfldata.sqlite:/usr/src/app/nfldata.sqlite \
+  --name nfldata-api \
   nfldata-api:local

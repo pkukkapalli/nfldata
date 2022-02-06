@@ -12,19 +12,22 @@ import { searchCoaches } from "./coachesApi";
 class CoachingTree extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchQuery: '', searchResults: [], errorMessage: '' };
-    this.debouncedFetchSearchResults = debounce(() => this.fetchSearchResults(), /* wait= */ 500);
+    this.state = { searchQuery: "", searchResults: [], errorMessage: "" };
+    this.debouncedFetchSearchResults = debounce(
+      () => this.fetchSearchResults(),
+      /* wait= */ 500
+    );
   }
 
   async fetchSearchResults() {
-    const {success, coaches, errorMessage} = await searchCoaches({
+    const { success, coaches, errorMessage } = await searchCoaches({
       query: this.state.searchQuery,
     });
     if (success) {
       this.setState({ searchResults: coaches });
     } else {
       this.setState({ errorMessage });
-    } 
+    }
   }
 
   async onSearchQueryChanged(e) {
@@ -36,7 +39,10 @@ class CoachingTree extends Component {
     return (
       <div>
         <h1>Coaching Tree</h1>
-        <input value={this.state.searchQuery} onChange={this.onSearchQueryChanged.bind(this)}></input>
+        <input
+          value={this.state.searchQuery}
+          onChange={this.onSearchQueryChanged.bind(this)}
+        ></input>
         <ul>
           {this.state.searchResults.map(({ coach, name }) => (
             <li key={coach}>{name}</li>

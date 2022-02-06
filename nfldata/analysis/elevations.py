@@ -17,7 +17,8 @@ def import_elevations_csv():
 
     elevations = pd.read_csv('elevations.csv')
     for _, row in elevations.iterrows():
-        database.execute('''
+        database.execute(
+            '''
             INSERT OR REPLACE INTO city_elevations (
                 city,
                 state,
