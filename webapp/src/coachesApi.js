@@ -1,5 +1,4 @@
 const API = process.env.REACT_APP_API_SERVER_ADDRESS;
-console.log(API);
 
 export async function searchCoaches({ query = "", limit = 10 }) {
   try {

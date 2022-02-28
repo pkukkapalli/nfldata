@@ -39,7 +39,7 @@ scripts/splash-server.sh
 Then, run the spiders and build up the SQLite database use:
 
 ```sh
-scripts/build-database.sh
+scripts/spider.py --dev <spider name>
 ```
 
 Each of the spiders writes the data to a SQLite database saved as
@@ -67,6 +67,7 @@ get an idea of how to perform your own analyses.
 - [] Add a year field to `PlayerPosition` as players may change positions throughout their career.
 - [] Consolidate spiders, so that there are fewer passes over the same web pages.
 - [] Parse player transactions for free agents and undrafted free agents.
+- [] Fix the build-database.sh script to use the spider.py script.
 
 ## Dockerize everything
 
