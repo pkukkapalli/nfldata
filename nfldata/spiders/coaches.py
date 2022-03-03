@@ -82,7 +82,7 @@ def parse_coaches(response):
         "//p[contains(., 'Defensive Coordinator:')]/a/@href").get()
     if defensive_coordinator:
         yield CoachingStaffMember(
-            coach=offensive_coordinator,
+            coach=defensive_coordinator,
             team=team,
             position=CoachingPosition.DEFENSIVE_COORDNATOR)
 

@@ -22,3 +22,8 @@ def all_coaches():
 
     coaches = coaches_dao.lookup_coaches(query=query, limit=limit)
     return {'response': [dict(coach) for coach in coaches]}
+
+
+@app.route('/api/coaches/<coach_id>/tree')
+def coaching_tree(coach_id):
+    pass
