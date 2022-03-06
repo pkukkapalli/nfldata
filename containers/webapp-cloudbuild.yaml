@@ -1,9 +1,0 @@
-steps:
-- name: "gcr.io/cloud-builders/docker"
-  args:
-  - build
-  - "--tag=gcr.io/shadowgraph/nfldata-webapp:local"
-  - "--file=containers/webapp.Dockerfile"
-  - .
-images:
-- "gcr.io/shadowgraph/nfldata-webapp:local"
