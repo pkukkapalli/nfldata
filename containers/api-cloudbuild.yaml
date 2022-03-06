@@ -1,0 +1,9 @@
+steps:
+- name: "gcr.io/cloud-builders/docker"
+  args:
+  - build
+  - "--tag=gcr.io/shadowgraph/nfldata-api:local"
+  - "--file=containers/api.Dockerfile"
+  - .
+images:
+- "gcr.io/shadowgraph/nfldata-api:local"
