@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import subprocess
 import argparse
+from pathlib import Path
+import os
 
 parser = argparse.ArgumentParser(
     description='start an instance of the API server')
@@ -21,10 +23,11 @@ else:
     subprocess.call(['docker', 'rm', 'nfldata-api'])
     subprocess.check_call([
         'docker', 'build', '--tag', 'nfldata-api:local', '--file',
-        'containers/api.Dcokerfile', '.'
+        'containers/api.Dockerfile', '.'
     ])
+    sqlite_path = Path(os.getcwd()) / 'nfldata.sqlite'
     subprocess.call([
         'docker', 'run', '--publish', '5000:5000', '-v',
-        '$(pwd)/nfldata.sqlite:/usr/src/app/nfldata.sqlite', '--name',
+        f'{sqlite_path}:/usr/src/app/nfldata.sqlite', '--name',
         'nfldata-api', 'nfldata-api:local'
     ])
