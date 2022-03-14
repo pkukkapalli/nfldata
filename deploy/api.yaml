@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfldata-api
+  namespace: default
+  labels:
+    app: nfldata-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfldata-api
+  template:
+    metadata:
+      labels:
+        app: nfldata-api
+    spec:
+      containers:
+      - image: gcr.io/shadowgraph/github.com/pkukkapalli/nfldata-api:latest
+        name: nfldata-api-container
