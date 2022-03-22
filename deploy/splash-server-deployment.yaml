@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfldata-splash-server
+  namespace: default
+  labels:
+    app: nfldata-splash-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfldata-splash-server
+  template:
+    metadata:
+      labels:
+        app: nfldata-splash-server
+  spec:
+    containers:
+    - image: scrapinghub/splash
+      name: nfldata-splash-server-container
