@@ -5,7 +5,7 @@ metadata:
   namespace: default
   labels:
     app: nfldata-webapp
-spec:
+spec:W
   replicas: 1
   selector:
     matchLabels:
@@ -18,3 +18,32 @@ spec:
       containers:
       - image: gcr.io/shadowgraph/github.com/pkukkapalli/nfldata-webapp:latest
         name: nfldata-webapp-container
+      - image: gcr.io/shadowgraph/github.com/pkukkapalli/shadowgraph-agent:latest
+        name: shadowgraph-agent-container
+        command: ['bash', '-c']
+        args:
+        - while true; do
+            if [[ -e /etc/podinfo/labels ]]; then
+              echo -en '\n\n'; cat /etc/podinfo/labels; fi;
+            if [[ -e /etc/podinfo/annotations ]]; then
+              echo -en '\n\n'; cat /etc/podinfo/annotations; fi;
+            if [[ -e /etc/podinfo/status ]]; then
+              echo -en '\n\n'; cat /etc/podinfo/status; fi;
+            sleep 5;
+          done;
+        volumeMounts:
+        - name: podinfo
+          mountPath: /etc/podinfo
+      volumes:
+      - name: podinfo
+        downwardAPI:
+          items:
+          - path: 'labels'
+            fieldRef:
+              fieldPath: metadata.labels
+          - path: 'annotations'
+            fieldRef:
+              fieldPath: metadata.annotations
+          - path: 'status'
+            fieldRef:
+              fieldPath: status
